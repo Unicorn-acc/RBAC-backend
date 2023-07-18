@@ -1,0 +1,85 @@
+### 分页查询
+POST {{host}}/role/page?pageNum=1&pageSize=2
+token: {{token}}
+Content-Type: application/json
+
+{
+
+}
+
+### 根据Id查询角色接口
+GET {{host}}/role/info/1
+token: {{token}}
+Content-Type: application/json
+
+
+### 保存角色接口
+POST {{host}}/role/save
+token: {{token}}
+Content-Type: application/json
+
+{
+  "roleDesc": "单元测试专用角色",
+  "roleName": "单元测试专用角色"
+}
+
+### 更新角色接口
+POST {{host}}/role/update
+token: {{token}}
+Content-Type: application/json
+
+{
+  "id": 48,
+  "roleName": "角色1",
+  "roleDesc": "sd",
+  "recToken": 0
+}
+
+### 删除角色接口
+DELETE {{host}}/role/remove/1
+token: {{token}}
+Content-Type: application/json
+
+{
+
+}
+
+### 异常情况测试
+### 根据Id查询角色接口（角色不存在）
+GET {{host}}/role/info/11111
+token: {{token}}
+Content-Type: application/json
+
+### 保存角色接口(角色已存在)
+POST {{host}}/role/save
+token: {{token}}
+Content-Type: application/json
+
+{
+  "roleDesc": "管理员",
+  "roleName": "管理员"
+}
+
+### 更新角色接口 （角色名已存在）
+POST {{host}}/role/update
+token: {{token}}
+Content-Type: application/json
+
+{
+  "id": 48,
+  "roleName": "管理员",
+  "roleDesc": "sd",
+  "recToken": 0
+}
+
+### 更新角色接口(随机token错误)
+POST {{host}}/role/update
+token: {{token}}
+Content-Type: application/json
+
+{
+  "id": 48,
+  "roleName": "角色1",
+  "roleDesc": "sd",
+  "recToken": 1110
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rbac.mapper.RoleMapper">
+
+    <select id = "rolePage" resultType="role">
+        select *
+        from role
+        <where>
+            is_deleted = 0
+        <if test="param.roleName != null and param.roleName != ''">
+            and role_name like concat("%", #{param.roleName} ,"%")
+        </if>
+        <if test="param.roleDesc != null and param.roleDesc != ''">
+            and role_desc like concat("%", #{param.roleDesc} ,"%")
+        </if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id="getRoleListByEmpId" resultType="role">
+        select * from role
+        where is_deleted = 0 and id in (
+            select role_id from emp_role where emp_id = #{empId}
+        )
+    </select>
+
+    <select id="getNotAddedRoleByEmpId" resultType="role">
+        select * from role
+        where is_deleted = 0 and id not in (
+            select role_id from emp_role where emp_id = #{empId}
+        )
+    </select>
+
+    <delete id="removeEmpRoleRelationshipByRoleId">
+        delete from emp_role where role_id = #{role_id}
+    </delete>
+
+    <delete id="removeRoleMenuRelationshipByRoleId">
+        delete from role_menu where role_id = #{role_id}
+    </delete>
+
+    <select id="getRoleByRoleName" resultType="role">
+        select * from role where role_name = #{roleName} and is_deleted = 0
+    </select>
+
+    <select id="getRoleById" resultType="role">
+        select * from role where id = #{id} and is_deleted = 0 for update
+    </select>
+</mapper>

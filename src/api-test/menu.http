@@ -1,0 +1,8 @@
+### 获取菜单树
+GET {{host}}/menu/tree
+Content-Type: application/json
+token: {{token}}
+
+{
+
+}

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rbac.mapper.AuthMapper">
+
+    <select id="getMenuListByRoleId" resultType="java.lang.Long">
+        SELECT menu_id from role_menu where role_id = #{roleId}
+    </select>
+
+    <delete id="deleteRoleMenuByRoleId">
+        delete from role_menu where role_id = #{roleId}
+    </delete>
+
+<!--    一对多的插入，用collection-->
+    <insert id="saveRoleMenuList">
+        insert into role_menu(role_id, menu_id, create_time)
+        values
+        <foreach collection="menuIdList" separator="," item="menu_id">
+            (#{roleId}, #{menu_id}, now())
+        </foreach>
+    </insert>
+
+    <select id="getEmpListByRoleId" resultType="emp">
+        SELECT e.* FROM emp e
+            left join emp_role er on e.emp_no = er.emp_id
+        where er.role_id = #{roleId} and e.is_deleted = 0
+    </select>
+
+    <insert id="saveRoleEmpList">
+        insert into emp_role(emp_id, role_id, create_time)
+        values
+        <foreach collection="empIdList" separator="," item="emp_id">
+            (#{emp_id}, #{roleId} , now())
+        </foreach>
+    </insert>
+
+    <delete id="deleteRoleEmp">
+        delete from emp_role where emp_id = #{empId} and role_id = #{roleId}
+    </delete>
+
+    <insert id="saveEmpRoleList">
+        insert into emp_role(emp_id, role_id, create_time)
+        values
+        <foreach collection="roleIdList" separator="," item="role_id">
+            (#{empId}, #{role_id} , now())
+        </foreach>
+    </insert>
+
+    <select id="getPermissions" resultType="String">
+        SELECT m.url from menu m
+                              left join role_menu rm on m.id = rm.menu_id
+                              left join emp_role er on rm.role_id = er.role_id
+        where er.emp_id = #{emp_id}
+    </select>
+</mapper>

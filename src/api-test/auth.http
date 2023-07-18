@@ -1,0 +1,109 @@
+### 根据角色ID获取分配权限接口
+GET {{host}}/auth/getMenuListByRoleId/1
+token: {{token}}
+Content-Type: application/json
+
+{
+}
+
+### 更新角色ID分配权限接口
+POST {{host}}/auth/saveRoleMenu
+token: {{token}}
+Content-Type: application/json
+
+{
+  "menuIdList": [2, 3, 4],
+  "roleId": 2
+}
+
+
+### 根据角色ID获取已分配用户接口
+POST {{host}}/auth/getempByRoleId?id = 1
+token: {{token}}
+Content-Type: application/json
+
+{
+  "pageNum": 1,
+  "pageSize": 5
+}
+
+###
+POST {{host}}/auth/getNotAddedEmpByRoleId?id = 1
+token: {{token}}
+Content-Type: application/json
+
+{
+  "pageNum": 1,
+  "pageSize": 2
+}
+
+### 根据用户ID获取已分配角色接口
+POST {{host}}/auth/getRoleByEmpId?id = 108
+token: {{token}}
+Content-Type: application/json
+
+{
+  "pageNum": 1,
+  "pageSize": 2
+}
+
+### 保存角色分配的新用户接口
+POST {{host}}/auth/saveRoleEmp
+token: {{token}}
+Content-Type: application/json
+
+{
+  "empIdList": [],
+  "roleId": 1
+}
+
+### 删除用户已分配的角色接口
+POST {{host}}/auth/deleteEmpRole
+token: {{token}}
+Content-Type: application/json
+
+{
+  "empId": 145,
+  "roleId": 59
+}
+
+### 删除角色已分配的用户接口
+POST {{host}}/auth/deleteRoleEmp
+token: {{token}}
+Content-Type: application/json
+
+{
+  "empId": 108,
+  "roleId": 1
+}
+
+### 保存用户分配的新角色接口
+POST {{host}}/auth/saveEmpRole
+token: {{token}}
+Content-Type: application/json
+
+{
+  "empId": 108,
+  "roleIdList": [1, 2]
+}
+
+### 异常情况测试
+### 更新角色ID分配权限接口(角色不存在)
+POST {{host}}/auth/saveRoleMenu
+token: {{token}}
+Content-Type: application/json
+
+{
+  "menuIdList": [2, 3, 4],
+  "roleId": 211111
+}
+
+### 更新角色ID分配权限接口（权限不存在）
+POST {{host}}/auth/saveRoleMenu
+token: {{token}}
+Content-Type: application/json
+
+{
+  "menuIdList": [2, 3, 4121212],
+  "roleId": 2
+}

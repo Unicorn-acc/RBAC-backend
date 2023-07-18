@@ -1,0 +1,65 @@
+### 用户登录测试（登录成功）
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "name": "admin",
+  "password": "M9EEL9jtKXAuHSIWLyrLduM1ysxY2sopgrjQLbSU2AdNQdnyJKFgu1hq0u4AnXBcGT9Oxq1Wo0/0KQRBKXRkU4mcN9konlgSKDAar3PO364IBq+hC6TilgokWXt4eYM4YRT31DQT/8R9qvHOXMthtxaCOVT8xz/JBSzOHWHVoQ0="
+}
+
+### 查询用户接口
+GET {{host}}/userinfo
+token: {{token}}
+
+### 用户修改密码测试
+POST {{host}}/updatepassword
+token: {{token}}
+Content-Type: application/json
+
+{
+  "emp_id": 108,
+  "oripassword": "M9EEL9jtKXAuHSIWLyrLduM1ysxY2sopgrjQLbSU2AdNQdnyJKFgu1hq0u4AnXBcGT9Oxq1Wo0/0KQRBKXRkU4mcN9konlgSKDAar3PO364IBq+hC6TilgokWXt4eYM4YRT31DQT/8R9qvHOXMthtxaCOVT8xz/JBSzOHWHVoQ0=",
+  "newpassword": "beYf/xKtAhN1KaTnhXH7HD0GdFuMfAHoWoQkTNwDHT+plMgj4X9hJXDIFXPHAY0aMVMY3Hh31LoHfq+CkjDak6V9Achc5BZY5cUEHtVvNrxu7FnIhxxZWfr+utvmnRrKRHkrkxsZQxG8v48o+ZZcFXXfLj3q+IXSAusT8E75cm8="
+}
+
+### 异常情况测试 ###
+### 用户登录测试（用户名不存在）
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "name": "admin123",
+  "password": "M9EEL9jtKXAuHSIWLyrLduM1ysxY2sopgrjQLbSU2AdNQdnyJKFgu1hq0u4AnXBcGT9Oxq1Wo0/0KQRBKXRkU4mcN9konlgSKDAar3PO364IBq+hC6TilgokWXt4eYM4YRT31DQT/8R9qvHOXMthtxaCOVT8xz/JBSzOHWHVoQ0="
+}
+
+### 用户登录测试（密码输入错误）
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "name": "admin",
+  "password": "beYf/xKtAhN1KaTnhXH7HD0GdFuMfAHoWoQkTNwDHT+plMgj4X9hJXDIFXPHAY0aMVMY3Hh31LoHfq+CkjDak6V9Achc5BZY5cUEHtVvNrxu7FnIhxxZWfr+utvmnRrKRHkrkxsZQxG8v48o+ZZcFXXfLj3q+IXSAusT8E75cm8="
+}
+
+
+### 用户修改密码测试（原密码和新密码相同）
+POST {{host}}/updatepassword
+token: {{token}}
+Content-Type: application/json
+
+{
+  "emp_id": 108,
+  "oripassword": "M9EEL9jtKXAuHSIWLyrLduM1ysxY2sopgrjQLbSU2AdNQdnyJKFgu1hq0u4AnXBcGT9Oxq1Wo0/0KQRBKXRkU4mcN9konlgSKDAar3PO364IBq+hC6TilgokWXt4eYM4YRT31DQT/8R9qvHOXMthtxaCOVT8xz/JBSzOHWHVoQ0=",
+  "newpassword": "M9EEL9jtKXAuHSIWLyrLduM1ysxY2sopgrjQLbSU2AdNQdnyJKFgu1hq0u4AnXBcGT9Oxq1Wo0/0KQRBKXRkU4mcN9konlgSKDAar3PO364IBq+hC6TilgokWXt4eYM4YRT31DQT/8R9qvHOXMthtxaCOVT8xz/JBSzOHWHVoQ0="
+}
+
+### 用户修改密码测试（密码输入错误）
+POST {{host}}/updatepassword
+token: {{token}}
+Content-Type: application/json
+
+{
+  "emp_id": 108,
+  "oripassword": "beYf/xKtAhN1KaTnhXH7HD0GdFuMfAHoWoQkTNwDHT+plMgj4X9hJXDIFXPHAY0aMVMY3Hh31LoHfq+CkjDak6V9Achc5BZY5cUEHtVvNrxu7FnIhxxZWfr+utvmnRrKRHkrkxsZQxG8v48o+ZZcFXXfLj3q+IXSAusT8E75cm8=",
+  "newpassword": "M9EEL9jtKXAuHSIWLyrLduM1ysxY2sopgrjQLbSU2AdNQdnyJKFgu1hq0u4AnXBcGT9Oxq1Wo0/0KQRBKXRkU4mcN9konlgSKDAar3PO364IBq+hC6TilgokWXt4eYM4YRT31DQT/8R9qvHOXMthtxaCOVT8xz/JBSzOHWHVoQ0="
+}

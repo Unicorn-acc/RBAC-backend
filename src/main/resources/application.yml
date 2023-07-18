@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: RBAC
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/rbac?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: 123456
+  redis:
+    host: localhost
+    port: 6379
+
+
+mybatis-plus:
+  type-aliases-package: rbac.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    #在映射实体或者属性时 ，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
+    # 表名address_book->类名AddressBook
+    # 字段username->属性名userName
+    map-underscore-to-camel-case: true
+
+  global-config:
+    db-config:
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+
+
+logging:
+  level:
+    rbac.mapper: debug
+
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2ODk2NDU0MjksInRva2VuIjoie1widXNlcklkXCI6MTA4LFwidXNlck5hbWVcIjpcImFkbWluXCJ9In0.g7GfDcSEPV5X7BQyYvbJf8Txd9XPbJ_BcudqYoSKieg

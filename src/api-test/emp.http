@@ -1,0 +1,97 @@
+
+### 分页查询
+POST {{host}}/emp/page?pageNum=1&pageSize=2
+token: {{token}}
+Content-Type: application/json
+
+{
+
+}
+
+### 根据Id查询用户接口
+GET {{host}}/emp/info/108
+token: {{token}}
+Content-Type: application/json
+
+
+### 保存用户接口
+POST {{host}}/emp/save
+token: {{token}}
+Content-Type: application/json
+
+{
+  "empName": "单元测试专用用户",
+  "job": "员工",
+  "deptNo": "1",
+  "password": "M9EEL9jtKXAuHSIWLyrLduM1ysxY2sopgrjQLbSU2AdNQdnyJKFgu1hq0u4AnXBcGT9Oxq1Wo0/0KQRBKXRkU4mcN9konlgSKDAar3PO364IBq+hC6TilgokWXt4eYM4YRT31DQT/8R9qvHOXMthtxaCOVT8xz/JBSzOHWHVoQ0=",
+  "phone": "12345678901"
+}
+
+### 更新用户接口
+POST {{host}}/emp/update
+token: {{token}}
+Content-Type: application/json
+
+{
+  "empNo": 112,
+  "deptNo": 1,
+  "empName": "用户1",
+  "job": "员工",
+  "password": "M9EEL9jtKXAuHSIWLyrLduM1ysxY2sopgrjQLbSU2AdNQdnyJKFgu1hq0u4AnXBcGT9Oxq1Wo0/0KQRBKXRkU4mcN9konlgSKDAar3PO364IBq+hC6TilgokWXt4eYM4YRT31DQT/8R9qvHOXMthtxaCOVT8xz/JBSzOHWHVoQ0=",
+  "phone": "12345678901",
+  "recToken": 0
+}
+
+### 删除用户接口
+DELETE {{host}}/emp/remove/185
+token: {{token}}
+Content-Type: application/json
+
+{
+
+}
+
+### 异常情况测试
+### 添加用户（用户名已存在）
+POST {{host}}/emp/save
+token: {{token}}
+Content-Type: application/json
+
+{
+  "empName": "admin",
+  "job": "员工",
+  "deptNo": "1",
+  "password": "M9EEL9jtKXAuHSIWLyrLduM1ysxY2sopgrjQLbSU2AdNQdnyJKFgu1hq0u4AnXBcGT9Oxq1Wo0/0KQRBKXRkU4mcN9konlgSKDAar3PO364IBq+hC6TilgokWXt4eYM4YRT31DQT/8R9qvHOXMthtxaCOVT8xz/JBSzOHWHVoQ0=",
+  "phone": "12345678901"
+}
+
+### 更新用户（用户名已存在）
+POST {{host}}/emp/update
+token: {{token}}
+Content-Type: application/json
+
+{
+  "empNo": 112,
+  "deptNo": 1,
+  "empName": "admin",
+  "job": "员工",
+  "password": "M9EEL9jtKXAuHSIWLyrLduM1ysxY2sopgrjQLbSU2AdNQdnyJKFgu1hq0u4AnXBcGT9Oxq1Wo0/0KQRBKXRkU4mcN9konlgSKDAar3PO364IBq+hC6TilgokWXt4eYM4YRT31DQT/8R9qvHOXMthtxaCOVT8xz/JBSzOHWHVoQ0=",
+  "phone": "12345678901",
+  "recToken": 0
+}
+
+### 更新用户（token错误）
+POST {{host}}/emp/update
+token: {{token}}
+Content-Type: application/json
+
+{
+  "empNo": 112,
+  "deptNo": 1,
+  "empName": "用户1",
+  "job": "员工",
+  "password": "M9EEL9jtKXAuHSIWLyrLduM1ysxY2sopgrjQLbSU2AdNQdnyJKFgu1hq0u4AnXBcGT9Oxq1Wo0/0KQRBKXRkU4mcN9konlgSKDAar3PO364IBq+hC6TilgokWXt4eYM4YRT31DQT/8R9qvHOXMthtxaCOVT8xz/JBSzOHWHVoQ0=",
+  "phone": "12345678901",
+  "recToken": 111
+}
+

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rbac.mapper.EmpMapper">
+
+    <select id = "empPage" resultType="emp">
+        select *
+        from emp
+        <where>
+            is_deleted = 0
+
+            <if test="param.empName != null and param.empName != ''">
+                and emp_name like concat("%", #{param.empName}, "%")
+            </if>
+            <if test="param.deptNo != null and param.deptNo != 0">
+                and dept_no = #{param.deptNo}
+            </if>
+            <if test="param.job != null and param.job != ''">
+                and job like concat("%", #{param.job}, "%")
+            </if>
+            <if test="param.phone != null and param.phone != ''">
+                and phone like concat("%", #{param.phone}, "%")
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id="getEmpByRoleId" resultType="emp">
+        SELECT * FROM emp e
+        where e.is_deleted = 0 and e.emp_no in (
+            select emp_id from emp_role where role_id = #{roleId}
+        )
+    </select>
+
+
+    <select id="getNotAddedEmpByRoleId" resultType="emp">
+        SELECT * FROM emp e
+        where e.is_deleted = 0 and e.emp_no not in (
+            select emp_id from emp_role where role_id = #{roleId}
+        )
+    </select>
+
+
+    <select id="getUserByUsername" resultType="emp">
+        select * from emp where emp_name = #{username} and is_deleted = 0
+    </select>
+
+
+    <delete id="removeRelationshipByEmpid">
+        delete from emp_role where emp_id = #{id}
+    </delete>
+
+    <select id = "getEmpById" resultType="emp">
+        select * from emp where emp_no = #{id} and is_deleted = 0 for update
+    </select>
+</mapper>
