@@ -61,9 +61,10 @@ public class EmpServiceImpl extends ServiceImpl<EmpMapper, Emp> implements IEmpS
         String userName = loginUser.getEmp().getEmpName();
         UserToken userToken = new UserToken(userId, userName);
         String jwttoken = JWTUtils.createToken(userToken);
-
+ 
         // 认证通过 存入redis
-        redisCache.setCacheObject(RedisConstants.LOGIN_USER_KEY + userId, loginUser, RedisConstants.LOGIN_USER_TTL, TimeUnit.MILLISECONDS);
+        redisCache.setCacheObject(RedisConstants.LOGIN_USER_KEY + userId, loginUser);
+        redisCache.expire(RedisConstants.LOGIN_USER_KEY + userId, RedisConstants.LOGIN_USER_TTL);
         return jwttoken;
     }
 

@@ -12,7 +12,7 @@ public enum ExceptionEnum {
     USER_TOKEN_ISNULL(1001, "token不能为空。"),
     USER_TOKEN_EXPIRE(1002, "token已过期，请重新登陆。"),
     USER_TOKEN_ILLEGAL(1003, "token校验失败，请重新登陆。"),
-    AUTHENTICATION_ERROR(1004, "认证失败"),
+    AUTHENTICATION_ERROR(1004, "认证失败，请重新登录。"),
     ACCESS_ERROR(1005, "授权失败"),
 
 

@@ -8,6 +8,5 @@ public class RedisConstants {
     public static final Integer LOGIN_USER_TTL = 60 * 30 * 1000; // 30分钟
 
     private RedisConstants(){
-
     }
 }

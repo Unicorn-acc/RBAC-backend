@@ -21,7 +21,7 @@ import rbac.handler.AuthenticationEntryPointImpl;
  * @author MiracloW
  */
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)//开启@PreAuthorize()注解权限功能
+@EnableGlobalMethodSecurity(prePostEnabled = true) // 开启@PreAuthorize()注解权限功能
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //认证过滤器

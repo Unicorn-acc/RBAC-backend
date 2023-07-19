@@ -16,7 +16,7 @@ import java.util.List;
  * @author MiracloW
  */
 @Configuration
-public class FastJSONConfig {
+public class FastJSONConfig {// jackson
     @Bean
     public HttpMessageConverter<Object> configureMessageConverters() {
         // 1.创建一个Fastjson消息转换器
@@ -31,7 +31,7 @@ public class FastJSONConfig {
                 SerializerFeature.WriteNullStringAsEmpty,
                 // 将Number类型的null转成0
                 SerializerFeature.WriteNullNumberAsZero,
-                // 将List类型的null转成[]
+                  // 将List类型的null转成[]
                 SerializerFeature.WriteNullListAsEmpty,
                 // 将Boolean类型的null转成false
                 SerializerFeature.WriteNullBooleanAsFalse,

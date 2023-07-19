@@ -1,5 +1,6 @@
 package rbac.filter;
 
+import com.alibaba.fastjson.JSON;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -57,7 +58,19 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
         String redisKey = RedisConstants.LOGIN_USER_KEY + userToken.getUserId();
 
-        LoginUser loginUser = redisCache.getCacheObject(redisKey);// 从redis中获取用户信息
+        LoginUser loginUser;
+        Object cacheObject = redisCache.getCacheObject(redisKey);
+
+        // redis中用户不存在
+        if (Objects.isNull(cacheObject)) {
+            throw new CustomException(ExceptionEnum.AUTHENTICATION_ERROR);
+        }
+
+        if (cacheObject instanceof LoginUser) {
+            loginUser = (LoginUser) cacheObject;
+        } else {
+            loginUser = JSON.parseObject(JSON.toJSON(cacheObject).toString(), LoginUser.class);
+        }
 
         // redis中用户不存在
         if (Objects.isNull(loginUser)) {
